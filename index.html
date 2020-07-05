@@ -14,10 +14,27 @@
 			<p class="lead">Hecho por: Flores Navarro Luis Daniel</p>
 			<p class="lead">Grupo: 2CM4</p>
 			<div class="container" align="center">
-				<h1>Registro</h1>
+				
 			</div>
 			<div class="container">
-			<form action="./InsertData" method="post" >
+				 <div class="row">
+			    <div class="col-6">
+			    	<form action="./InsertData" method="post" >
+			    		<h1>Registro</h1>
+			    			<label>Ingresa tu correo</label>
+							<input type="email" class="form-control" name="email" required placeholder="Nombre Usuario">
+							<label>Ingresa tu usuario</label>
+							<input type="text" class="form-control" name="username" required placeholder="Nombre Usuario">
+							<label>Ingresa tu contraseña</label>
+							<input type="password" class="form-control"  name="userpass" required placeholder="Contraseña Usuario">
+							<br>
+							<input type="submit" class="form-control btn btn-dark">
+					</form>
+			    </div>
+			    <div class="col-6">
+			    	
+					<form action="./Login" method="post" >
+							<h1>Inicia Sesion</h1>
 							<label>Ingresa tu usuario</label>
 							<input type="text" class="form-control" name="username" required placeholder="Nombre Usuario">
 							<label>Ingresa tu contraseña</label>
@@ -25,6 +42,9 @@
 							<br>
 							<input type="submit" class="form-control btn btn-dark">
 			</form>
+			    </div>
+  				</div>
+			
 			  
 		        <!-- 
 		        	http://localhost:8080/CrudFotos/Login
@@ -41,6 +61,8 @@
 		         -->
 		      
 			</div>
+			
+			
 	</div>	
 </body>
 
