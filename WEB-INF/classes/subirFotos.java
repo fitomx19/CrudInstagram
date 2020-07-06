@@ -1,55 +1,46 @@
-import java.io.IOException; 
-import java.io.PrintWriter; 
-import java.sql.Connection; 
-import java.sql.PreparedStatement; 
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.net.*;
-import javax.servlet.ServletException; 
-import javax.servlet.annotation.WebServlet; 
-import javax.servlet.http.HttpServlet; 
-import javax.servlet.http.HttpServletRequest; 
-import javax.servlet.http.HttpServletResponse; 
-import javax.servlet.http.HttpSession; 
-import javax.servlet.http.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.util.*;
 import java.io.*;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 
-@WebServlet("/subirFotos") 
-public class subirFotos extends HttpServlet { 
-    private static final long serialVersionUID = 1L; 
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // Obtiene <input type="text" name="txtDir">
- 
-    
+@WebServlet("/subirFotos")
 
 
+public class subirFotos extends HttpServlet {
 
-    try { 
 
-           
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    int parametro1 = Integer.parseInt(request.getParameter("idusuarios"));
+    Part filePart = request.getPart("archivo"); 
+    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+    InputStream fileContent = filePart.getInputStream();
+   try { 
+        String query="INSERT INTO fotos(nombre,idusuarios) values (?,?)";
             Connection con = DatabaseConnection.initializeDatabase(); 
-            PreparedStatement st = con.prepareStatement("insert into fotos (nombre, idusuarios) values(?, ?)"); 
+            PreparedStatement pst;
+            pst=con.prepareStatement(query);
+         
 
-            
-            st.setString(1, request.getParameter("nombre")); 
+          //  String filePath= savePath + File.separator + fileName ;
 
-            
-            st.setString(2, request.getParameter("id")); 
-
-
-            
-            st.executeUpdate(); 
-
-            
-            st.close(); 
-            con.close(); 
-        } 
+            pst.setString(1,fileName);
+            pst.setInt(2,parametro1);
+            pst.executeUpdate();
+             } 
         catch (Exception e) { 
             e.printStackTrace(); 
-        }     
- }  
-}
-
-//javac -classpath ".;C:\Program Files\tomcat\lib\servlet.jar" Login.java
+                } 
+            }
+        }
+ 

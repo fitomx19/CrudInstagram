@@ -59,8 +59,8 @@ HttpServletResponse response)
                 out.println("<form action=\"./subirFotos\" method=\"post\" enctype=\"multipart/form-data\" >");
                 out.println("<label>Sube tu archivo</label>");
                 out.println("<input  type=\"file\"  id=\"archivo\"  accept=\"image/*\" name=\"archivo\">");
-                out.println("<input type=\"hidden\" value="+id+" name=\"id\"><br><br>");
-                out.println("<input type=\"text\"  name=\"nombre\"><br><br>");
+               
+                out.println("<input type=\"text\"  name="+id+"><br><br>");
                 out.println("<button type=\"submit\"  class=\"btn btn-dark form-control\" >Añade mas fotos!</button>");  
 
 
